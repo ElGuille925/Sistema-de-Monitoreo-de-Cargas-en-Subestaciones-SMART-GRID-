@@ -1,3 +1,5 @@
+import time 
+
 from Clase_Hija_Niveles_Voltajes import NivelesVoltaje
 from Clase_Hija_Historial_Corriente import HistorialCorriente
 from Clase_Hija_Administracion_Equipos import AdministracionEquipos
@@ -21,7 +23,7 @@ if __name__ == "__main__":
     matriz_voltajes = []
     lista_corriente = []
     cargas_ordenadas = []
-
+    
     opcion_principal = 0
     while opcion_principal != 7:
         try:
@@ -42,15 +44,21 @@ Seleccione una opción: """))
 
         if opcion_principal == 1:
             matriz_voltajes = voltajes_obj.registrar_niveles()
+            time.sleep(5)
         elif opcion_principal == 2:
             lista_corriente = corriente_obj.registrar_historial()
+            time.sleep(5)
         elif opcion_principal == 3:
             equipos_obj.mostrar_parametros()
+            time.sleep(5)
         elif opcion_principal == 4:
             interruptores_obj.registrar_interruptor()
+            time.sleep(5)
         elif opcion_principal == 5:
             cargas_leidas = energia_obj.Lecturas_de_Consumo_de_Cargas()
+            print("...")
             cargas_ordenadas = energia_obj.Organizador_de_RCE(cargas_leidas)
+            time.sleep(5)
             print("\nConsumo energético ordenado de mayor a menor:", cargas_ordenadas)
             while True:
                 try:
@@ -59,13 +67,26 @@ Seleccione una opción: """))
                 except ValueError:
                     print("Error: Ingrese un número válido.")
             energia_obj.buscar_picos_sobrecarga(cargas_leidas, umbral_referencia)
+            time.sleep(5)
         elif opcion_principal == 6:
+            print("Guardando datos en archivos...")
+            time.sleep(1.5)
+            print("...")
+            time.sleep(1.5)
+            print("...")
+            time.sleep(1.5)
+            print("...")
+            time.sleep(1.5)
+            print("Datos guardados con exito")
+            time.sleep(1.5)
+            
             persistencia_obj.guardar_datos(
                 niveles_voltaje=matriz_voltajes,
                 historial_corriente=lista_corriente,
                 interruptores=interruptores_obj.interruptores_disparados,
                 consumo_ordenado=cargas_ordenadas
             )
+            time.sleep(5)
         elif opcion_principal == 7:
             print("\nSaliendo del sistema de monitoreo de cargas")
         else:
